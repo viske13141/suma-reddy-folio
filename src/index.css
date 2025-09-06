@@ -159,7 +159,7 @@
   .card-interactive {
     @apply bg-gradient-to-br from-card to-card-hover border border-border rounded-xl;
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-    @apply cursor-pointer group;
+    @apply cursor-pointer;
   }
   
   /* Section Styles */
