@@ -10,11 +10,11 @@ export const HeroSection = () => {
   };
 
   const handleLinkedInClick = () => {
-    window.open("https://linkedin.com", "_blank");
+    window.open("https://www.linkedin.com/in/munnangi-suma-reddy-024734269/", "_blank");
   };
 
   const handleGitHubClick = () => {
-    window.open("https://github.com", "_blank");
+    window.open("https://github.com/SumaReddyMunnangi", "_blank");
   };
 
   return (

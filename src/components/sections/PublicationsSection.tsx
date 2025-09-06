@@ -4,25 +4,25 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Calendar, ExternalLink } from "lucide-react";
 
 export const PublicationsSection = () => {
-  const elementRef = useScrollAnimation();
+  const headerRef = useScrollAnimation();
+  const cardRef = useScrollAnimation();
 
   return (
     <section id="publications" className="py-20 section-gradient">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={elementRef} className="fade-in">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Research <span className="text-primary">Publications</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Contributing to the academic community through research and innovation
-            </p>
-          </div>
+        {/* Section Header */}
+        <div ref={headerRef} className="fade-in text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Research <span className="text-primary">Publications</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Contributing to the academic community through research and innovation
+          </p>
+        </div>
 
-          {/* Publication Card */}
-          <div className="max-w-4xl mx-auto">
+        {/* Publication Card */}
+        <div ref={cardRef} className="scale-in animation-delay-300 max-w-4xl mx-auto">
             <Card className="card-interactive p-8 group">
               <CardContent className="p-0">
                 <div className="flex items-start space-x-6">
@@ -105,8 +105,7 @@ export const PublicationsSection = () => {
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          </div>
+          </Card>
         </div>
       </div>
     </section>

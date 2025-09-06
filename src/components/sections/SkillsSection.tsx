@@ -42,27 +42,31 @@ const skillsData = [
 ];
 
 export const SkillsSection = () => {
-  const elementRef = useScrollAnimation();
+  const headerRef = useScrollAnimation();
 
   return (
     <section id="skills" className="py-20 section-gradient">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={elementRef} className="fade-in">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Technical <span className="text-primary">Skills</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              A comprehensive toolkit for building innovative solutions
-            </p>
-          </div>
+        {/* Section Header */}
+        <div ref={headerRef} className="fade-in text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Technical <span className="text-primary">Skills</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            A comprehensive toolkit for building innovative solutions
+          </p>
+        </div>
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillsData.map((skillCategory, index) => (
-              <Card key={index} className="card-interactive p-6 group">
+        {/* Skills Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillsData.map((skillCategory, index) => {
+            const skillRef = useScrollAnimation();
+            const delayClass = `animation-delay-${index * 200}`;
+            
+            return (
+              <div ref={skillRef} key={index} className={`scale-in ${delayClass}`}>
+                <Card className="card-interactive p-6 group h-full">
                 <CardContent className="p-0">
                   {/* Header */}
                   <div className="flex items-center space-x-4 mb-6">
@@ -83,36 +87,45 @@ export const SkillsSection = () => {
                       </span>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Additional Skills */}
-          <div className="mt-16 text-center">
-            <h3 className="text-xl font-semibold text-foreground mb-6">Core Competencies</h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                "Problem Solving",
-                "Algorithm Design",
-                "Software Architecture",
-                "Version Control (Git)",
-                "Agile Methodology",
-                "Technical Documentation",
-                "Code Review",
-                "Testing & Debugging"
-              ].map((competency, index) => (
-                <span
-                  key={index}
-                  className="px-4 py-2 bg-gradient-to-r from-primary to-accent-blue text-white rounded-full text-sm font-medium hover:shadow-medium transition-all duration-300 cursor-default"
-                >
-                  {competency}
-                </span>
-              ))}
-            </div>
-          </div>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
         </div>
+
+        {/* Additional Skills */}
+        <SkillsFooter />
       </div>
     </section>
+  );
+};
+
+const SkillsFooter = () => {
+  const footerRef = useScrollAnimation();
+  
+  return (
+    <div ref={footerRef} className="fade-in animation-delay-800 mt-16 text-center">
+      <h3 className="text-xl font-semibold text-foreground mb-6">Core Competencies</h3>
+      <div className="flex flex-wrap justify-center gap-4">
+        {[
+          "Problem Solving",
+          "Algorithm Design",
+          "Software Architecture",
+          "Version Control (Git)",
+          "Agile Methodology",
+          "Technical Documentation",
+          "Code Review",
+          "Testing & Debugging"
+        ].map((competency, index) => (
+          <span
+            key={index}
+            className="px-4 py-2 bg-gradient-to-r from-primary to-accent-blue text-white rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default"
+          >
+            {competency}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 };

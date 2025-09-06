@@ -3,27 +3,28 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Target, Lightbulb, Heart } from "lucide-react";
 
 export const AboutSection = () => {
-  const elementRef = useScrollAnimation();
+  const headerRef = useScrollAnimation();
+  const leftColumnRef = useScrollAnimation();
+  const rightColumnRef = useScrollAnimation();
 
   return (
     <section id="about" className="py-20 section-gradient">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={elementRef} className="fade-in">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              About <span className="text-primary">Me</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Driven by curiosity and passion for technology
-            </p>
-          </div>
+        {/* Section Header */}
+        <div ref={headerRef} className="fade-in text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            About <span className="text-primary">Me</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Driven by curiosity and passion for technology
+          </p>
+        </div>
 
-          {/* Main Content */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Objective Text */}
-            <div className="space-y-6">
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Objective Text */}
+          <div ref={leftColumnRef} className="slide-in-left animation-delay-200 space-y-6">
               <Card className="card-interactive p-6">
                 <CardContent className="p-0">
                   <div className="flex items-start space-x-4">
@@ -66,8 +67,8 @@ export const AboutSection = () => {
               </Card>
             </div>
 
-            {/* Skills Highlights */}
-            <div className="space-y-6">
+          {/* Skills Highlights */}
+          <div ref={rightColumnRef} className="slide-in-right animation-delay-400 space-y-6">
               <Card className="card-interactive p-6">
                 <CardContent className="p-0">
                   <div className="flex items-start space-x-4">
@@ -108,7 +109,6 @@ export const AboutSection = () => {
                   </CardContent>
                 </Card>
               </div>
-            </div>
           </div>
         </div>
       </div>

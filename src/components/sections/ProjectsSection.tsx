@@ -69,28 +69,32 @@ const projectsData = [
 ];
 
 export const ProjectsSection = () => {
-  const elementRef = useScrollAnimation();
+  const headerRef = useScrollAnimation();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
   return (
     <section id="projects" className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={elementRef} className="fade-in">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Featured <span className="text-primary">Projects</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Innovative solutions that demonstrate technical expertise and creative problem-solving
-            </p>
-          </div>
+        {/* Section Header */}
+        <div ref={headerRef} className="fade-in text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Featured <span className="text-primary">Projects</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Innovative solutions that demonstrate technical expertise and creative problem-solving
+          </p>
+        </div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {projectsData.map((project, index) => (
-              <Card key={index} className="card-interactive p-6 group">
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {projectsData.map((project, index) => {
+            const projectRef = useScrollAnimation();
+            const delayClass = `animation-delay-${index * 300}`;
+            
+            return (
+              <div ref={projectRef} key={index} className={`scale-in ${delayClass}`}>
+                <Card className="card-interactive p-6 group h-full">
                 <CardContent className="p-0">
                   {/* Project Header */}
                   <div className="flex items-start space-x-4 mb-4">
@@ -179,11 +183,12 @@ export const ProjectsSection = () => {
                     <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
                       <ExternalLink className="w-4 h-4" />
                     </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

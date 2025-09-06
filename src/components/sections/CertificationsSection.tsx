@@ -47,29 +47,55 @@ const interpersonalSkills = [
 ];
 
 export const CertificationsSection = () => {
-  const elementRef = useScrollAnimation();
+  const headerRef = useScrollAnimation();
 
   return (
     <section id="certifications" className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={elementRef} className="fade-in">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Certifications & <span className="text-primary">Skills</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Professional certifications and interpersonal skills that enhance technical expertise
-            </p>
-          </div>
+        {/* Section Header */}
+        <div ref={headerRef} className="fade-in text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Certifications & <span className="text-primary">Skills</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent-blue mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Professional certifications and interpersonal skills that enhance technical expertise
+          </p>
+        </div>
 
-          {/* Certifications */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">Professional Certifications</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {certificationsData.map((cert, index) => (
-                <Card key={index} className="card-interactive p-6 group">
+        {/* Certifications */}
+        <div className="mb-16">
+          <CertificationsList />
+        </div>
+
+        {/* Interpersonal Skills */}
+        <div className="mb-16">
+          <InterpersonalSkillsList />
+        </div>
+
+        {/* Skills Summary */}
+        <SkillsSummary />
+      </div>
+    </section>
+  );
+};
+
+const CertificationsList = () => {
+  const listHeaderRef = useScrollAnimation();
+  
+  return (
+    <>
+      <div ref={listHeaderRef} className="fade-in animation-delay-200">
+        <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">Professional Certifications</h3>
+      </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certificationsData.map((cert, index) => {
+          const certRef = useScrollAnimation();
+          const delayClass = `animation-delay-${(index + 1) * 200}`;
+          
+          return (
+            <div ref={certRef} key={index} className={`scale-in ${delayClass}`}>
+              <Card className="card-interactive p-6 group h-full">
                   <CardContent className="p-0">
                     <div className="text-center">
                       {/* Icon */}
@@ -86,18 +112,32 @@ export const CertificationsSection = () => {
                         {cert.type}
                       </span>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                </CardContent>
+              </Card>
             </div>
-          </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
 
-          {/* Interpersonal Skills */}
-          <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">Interpersonal Skills</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {interpersonalSkills.map((item, index) => (
-                <Card key={index} className="card-interactive p-6 group text-center">
+const InterpersonalSkillsList = () => {
+  const skillsHeaderRef = useScrollAnimation();
+  
+  return (
+    <>
+      <div ref={skillsHeaderRef} className="fade-in animation-delay-600">
+        <h3 className="text-2xl font-semibold text-foreground mb-8 text-center">Interpersonal Skills</h3>
+      </div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {interpersonalSkills.map((item, index) => {
+          const skillRef = useScrollAnimation();
+          const delayClass = `animation-delay-${(index + 4) * 200}`;
+          
+          return (
+            <div ref={skillRef} key={index} className={`scale-in ${delayClass}`}>
+              <Card className="card-interactive p-6 group text-center h-full">
                   <CardContent className="p-0">
                     <div className="w-12 h-12 bg-gradient-to-br from-success to-accent-blue rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       <CheckCircle className="w-6 h-6 text-white" />
@@ -108,14 +148,21 @@ export const CertificationsSection = () => {
                     <p className="text-muted-foreground text-sm">
                       {item.description}
                     </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+              </CardContent>
+            </Card>
           </div>
+        );
+      })}
+    </div>
+  </>
+);
+};
 
-          {/* Skills Summary */}
-          <div className="mt-16 text-center">
+const SkillsSummary = () => {
+  const summaryRef = useScrollAnimation();
+  
+  return (
+    <div ref={summaryRef} className="scale-in animation-delay-1000 text-center">
             <Card className="card-interactive p-8 max-w-4xl mx-auto">
               <CardContent className="p-0">
                 <h3 className="text-xl font-semibold text-foreground mb-4">Continuous Learning Journey</h3>
@@ -140,10 +187,7 @@ export const CertificationsSection = () => {
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
+      </Card>
+    </div>
   );
 };
